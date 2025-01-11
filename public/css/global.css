@@ -1,0 +1,28 @@
+.flex-grid {
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+}
+.col {
+    flex: 1;
+}
+
+.bulk {
+    flex: 3;
+}
+
+header {
+    margin: 0;
+
+    img {
+        height: 200px;
+    }
+}
+
+main {
+    max-width: revert;
+}
+
+hr {
+    border: 2px solid var(--fg);
+}
