@@ -19,10 +19,21 @@ header {
     }
 }
 
-main {
-    max-width: revert;
-}
-
 hr {
     border: 2px solid var(--fg);
+}
+
+a.button {
+    /*
+     * Magick CSS
+     * by: winterveil (https://github.com/wintermute-cell/)
+     * license: MIT
+     * version: 1.0.5
+     */
+    background-color: transparent; /* 1 */
+    color: var(--fg); /* 1 */
+    padding: 10px; /* 2 */
+    margin-top: 1.6rem; /* 3 */
+    border: 1px solid var(--fg); /* 4 */
+    cursor: pointer; /* 5 */
 }

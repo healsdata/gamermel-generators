@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Generators{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Generators</h1>
+    </header>
+    <section>
+        {% for generator in generators %}
+            <a href="{{ url_for('generator', { 'generator': generator.slug }) }}" class="button">{{ generator.name }}</a>
+        {% else %}
+            <em>No generators found</em>
+        {% endfor %}
+    </section>
+{% endblock %}
