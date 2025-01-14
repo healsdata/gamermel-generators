@@ -5,6 +5,7 @@ namespace Healsdata\GamermelGenerators\Controller;
 use Google\Service\Exception as GoogleServiceException;
 use Healsdata\GamermelGenerators\Repository\CategoryRepository;
 use Healsdata\GamermelGenerators\Repository\GeneratorRepository;
+use Healsdata\GamermelGenerators\Repository\MonsterRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpNotFoundException;
@@ -16,7 +17,8 @@ class MonsterController
 {
     public function __construct(
         private readonly GeneratorRepository $generatorRepository,
-        private readonly CategoryRepository  $categoryRepository
+        private readonly CategoryRepository  $categoryRepository,
+        private readonly MonsterRepository $monsterRepository,
     )
     {
     }
@@ -42,8 +44,9 @@ class MonsterController
             $response,
             'monster.html.twig',
             [
-                'generator' => $generator,
-                'category' => $category
+                'generator' => $generatorDto,
+                'category' => $categoryDto,
+                'monster' => $this->monsterRepository->random(),
             ]
         );
     }
