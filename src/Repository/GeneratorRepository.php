@@ -2,33 +2,24 @@
 
 namespace Healsdata\GamermelGenerators\Repository;
 
+use Healsdata\GamermelGenerators\Dto\Generator;
+
 class GeneratorRepository
 {
-    const GENERATORS = [
-        [
-            'slug' => 'monster',
-            'name' => 'Monsters',
-        ],
-        [
-            'slug' => 'test',
-            'name' => 'Test',
-        ],
-        [
-            'slug' => 'gift',
-            'name' => 'Gifts',
-        ]
-
-    ];
-
-    public function list() : array
+    /**
+     * @return array<Generator>
+     */
+    public function list(): array
     {
-        return self::GENERATORS;
+        return [
+            new Generator('Monsters', 'monster', '1JK7hLLHhtMlhD-VmcuVIdY9wpfVyvcJpjQ039os-Xoo')
+        ];
     }
 
-    public function getBySlug(string $slug) : ?array
+    public function getBySlug(string $slug): ?Generator
     {
-        foreach (self::GENERATORS as $generator) {
-            if ($generator['slug'] === $slug) {
+        foreach ($this->list() as $generator) {
+            if ($generator->slug === $slug) {
                 return $generator;
             }
         }

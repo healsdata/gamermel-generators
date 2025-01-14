@@ -1,16 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ generator.name }} | Generators{% endblock %}
+{% block title %}Generators{% endblock %}
 
 {% block content %}
     <header>
-        <h1>{{ generator.name }}</h1>
+        <h1>Generators</h1>
     </header>
     <section>
-        {% for category in categories %}
-            <a href="{{ url_for('category', { 'generator': generator.slug, 'category': category.slug }) }}" class="button">{{ category.name }}</a>
+        {% for generator in generators %}
+            <a href="{{ url_for('category', { 'generator': generator.slug }) }}" class="button">{{ generator.name }}</a>
         {% else %}
-            <em>No categories found</em>
+            <em>No generators found</em>
         {% endfor %}
     </section>
 {% endblock %}
