@@ -20,7 +20,7 @@ header {
 }
 
 hr {
-    border: 2px solid var(--fg);
+    border-top: 1px solid var(--fg);
 }
 
 a.button {
@@ -30,10 +30,24 @@ a.button {
      * license: MIT
      * version: 1.0.5
      */
-    background-color: transparent; /* 1 */
+    background-color: #dadada; /* 1 */
+    font-weight: bold;
     color: var(--fg); /* 1 */
     padding: 10px; /* 2 */
     margin-top: 1.6rem; /* 3 */
     border: 1px solid var(--fg); /* 4 */
     cursor: pointer; /* 5 */
+}
+
+section.buttons {
+    text-align: center;
+}
+
+section.buttons .button {
+    display: block;
+}
+
+.button.back {
+    background-color: transparent;
+    font-weight: normal;
 }

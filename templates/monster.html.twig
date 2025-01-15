@@ -8,8 +8,7 @@
 
 {% block content %}
 <header>
-    <figure><img src="/images/monster.png"></figure>
-
+    <figure><img src="/images/fad3.png"></figure>
     <h1>{{ category.name }}</h1>
     <h4>{{ monster.categoryNote }}</h4>
 </header>
@@ -37,5 +36,8 @@
 
         </div>
     </div>
+</section>
+<section class="buttons">
+    <a href="{{ url_for('category', { 'generator': generator.slug }) }}" class="button back">Back</a>
 </section>
 {% endblock content %}

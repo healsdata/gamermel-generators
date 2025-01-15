@@ -4,10 +4,10 @@
 
 {% block content %}
     <header>
-        <figure><img src="/images/monster.png"></figure>
+        <figure><img src="/images/fad3.png"></figure>
         <h1>Generators</h1>
     </header>
-    <section>
+    <section class="buttons">
         {% for generator in generators %}
             <a href="{{ url_for('category', { 'generator': generator.slug }) }}" class="button">{{ generator.name }}</a>
         {% else %}
