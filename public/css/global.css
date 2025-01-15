@@ -1,14 +1,23 @@
 .flex-grid {
     display: flex;
     gap: 25px;
-    margin-top: 25px;
 }
 .col {
     flex: 1;
 }
 
-.bulk {
+.col.bulk {
     flex: 3;
+}
+
+.lined p {
+    border-bottom: 1px solid var(--fg);
+    padding-bottom: 1.6rem;
+}
+
+.lined p:last-of-type {
+    border-bottom: none;
+    padding-bottom: revert;
 }
 
 header {
@@ -17,10 +26,6 @@ header {
     img {
         height: 200px;
     }
-}
-
-hr {
-    border-top: 1px solid var(--fg);
 }
 
 a.button {

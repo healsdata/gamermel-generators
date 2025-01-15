@@ -46,7 +46,7 @@ class MonsterController
             [
                 'generator' => $generatorDto,
                 'category' => $categoryDto,
-                'monster' => $this->monsterRepository->random(),
+                'monster' => $this->monsterRepository->random($generatorDto, $categoryDto),
             ]
         );
     }

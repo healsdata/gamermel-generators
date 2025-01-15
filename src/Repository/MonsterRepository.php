@@ -2,25 +2,57 @@
 
 namespace Healsdata\GamermelGenerators\Repository;
 
+use Google\Service\Exception as GoogleServiceException;
+use Google\Service\Sheets;
+use Healsdata\GamermelGenerators\Dto\Category;
+use Healsdata\GamermelGenerators\Dto\Generator;
 use Healsdata\GamermelGenerators\Dto\Monster;
 
 class MonsterRepository
 {
+    public function __construct(
+        private readonly Sheets $googleSheets
+    ){}
 
-    public function random(): Monster
+    /**
+     * @param Generator $generator
+     * @param Category $category
+     * @return null|Monster
+     * @throws GoogleServiceException
+     */
+    public function random(Generator $generator, Category $category): ?Monster
     {
-        return new Monster(
-            "2d6 Skeletal Rats",
-            "Surviving 10 Encounters gives 1 XP Roll if level 5 or lower and 5 Encounters gives 1 XP Roll if 6 or higher.",
-            "Level 3 Undead",
-            "5 Life",
-            "2 Attacks",
-            "Never test morale.",
-            "Crushing weapon attacks are at +1 against skeletal rats, but they cannot be attacked by bows and slings. Clerics add +L when attacking them because they are undead.",
-            "Reactions (d6): 1-2 flee, 3-6 fight",
-            "Note: When you kill a Chaos Lord, roll a die; on a 5 or 6 a character of your choice finds a clue (see p.58).",
-            "No Treasure", "Core Book"
-        );
-    }
+        $monster = new Monster();
 
+        $range = $category->name . "!A2";
+        $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
+        $monster->categoryNote = $response->getValues()[0][0];
+
+        $range = $category->name . "!5:5";
+        $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
+        $keys = $response->getValues()[0];
+        $keys = array_map('strtolower', $keys);
+
+        $columns = range('A', 'Z');
+        $lastColumn = $columns[sizeof($keys) - 1];
+
+        $range = $category->name . "!A6:" . $lastColumn . "99";
+        $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
+        $data = $response->getValues();
+
+        $datum = array_combine($keys, $data[array_rand($data)]);
+
+        $monster->name = $datum['name'];
+        $monster->level = $datum['level'];
+        $monster->life  = $datum['life'];
+        $monster->attacks = $datum['attacks'];
+        $monster->morale = $datum['morale'];
+        $monster->attackNotes = $datum['attack notes'];
+        $monster->reactions = $datum['reactions'];
+        $monster->specialNotes = $datum['special notes'];
+        $monster->treasure = $datum['treasure'];
+        $monster->source = $datum['source'];
+
+        return $monster;
+    }
 }
