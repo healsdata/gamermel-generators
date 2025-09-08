@@ -28,7 +28,7 @@ class MonsterRepository
         $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
         $monster->categoryNote = $response->getValues()[0][0];
 
-        $range = $category->name . "!5:5";
+        $range = $category->name . "!9:9";
         $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
         $keys = $response->getValues()[0];
         $keys = array_map('strtolower', $keys);
@@ -36,7 +36,7 @@ class MonsterRepository
         $columns = range('A', 'Z');
         $lastColumn = $columns[sizeof($keys) - 1];
 
-        $range = $category->name . "!A6:" . $lastColumn . "99";
+        $range = $category->name . "!A10:" . $lastColumn . "99";
         $response = $this->googleSheets->spreadsheets_values->get($generator->sheetId, $range);
         $data = $response->getValues();
 
